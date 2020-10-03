@@ -47,6 +47,7 @@ namespace SimpleStation
         public async static Task MainAsync(string[] args)
         {
             var shouldShowHelp = false;
+            string[] stationType = { "assembly", "test", "packaging" };
 
             // command line options
             Mono.Options.OptionSet options = new Mono.Options.OptionSet {
@@ -65,8 +66,7 @@ namespace SimpleStation
                     }
                 },
                 // station type options
-                { "st|stationtype=", "sets the station type\nDefault: assemblystation", (string s) => {
-                        List<string> stationType = new List<string> {"assembly", "test", "packaging"};
+                { "st|stationtype=", $"sets the station type and default port\nDefault: {stationType[0]}\nAllowed: {stationType[0]}, {stationType[1]}, {stationType[2]}", (string s) => {
                         if (stationType.Contains(s.ToLowerInvariant()))
                         {
                             _stationType = s.ToLowerInvariant();
